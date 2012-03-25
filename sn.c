@@ -7,7 +7,7 @@ int main(int argc,char**argv){
 	glfwOpenWindow(512,512,0,0,0,0,0,0,GLFW_WINDOW);
 	glOrtho(0,512,512,0,1,-1);
 	srand(glfwGetTime());
-	struct{short x,y;}tail[16384];
+	struct{short x,y;}tail[7396];
 	die:;
 	int tlen=1,apx=tail->x=256,apy=tail->y=256,dir=0;
 	double fps=30;
