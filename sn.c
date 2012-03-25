@@ -10,7 +10,6 @@ int main(int argc,char**argv){
 	struct{short x,y;}tail[7396];
 	die:;
 	int tlen=1,apx=tail->x=256,apy=tail->y=256,dir=0;
-	double fps=30;
 	for(;;){
 		glClear(GL_COLOR_BUFFER_BIT);
 		int dx=glfwGetKey(GLFW_KEY_RIGHT)-glfwGetKey(GLFW_KEY_LEFT),dy=glfwGetKey(GLFW_KEY_DOWN)-glfwGetKey(GLFW_KEY_UP);
@@ -42,8 +41,7 @@ int main(int argc,char**argv){
 		glColor3ub(255,0,0);
 		glRecti(apx-12,apy-12,apx+12,apy+12);
 		glfwSwapBuffers();
-		if(fps<60)fps+=.03125;
-		glfwSleep(1./fps-glfwGetTime());
+		glfwSleep(1./60-glfwGetTime());
 		glfwSetTime(0);
 		glfwPollEvents();
 		if(glfwGetKey(GLFW_KEY_ESC)||!glfwGetWindowParam(GLFW_OPENED))return 0;
