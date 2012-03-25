@@ -31,7 +31,7 @@ int main(int argc,char**argv){
 		for(int i=0;i<tlen;i++){
 			if(i>2&&abs(tail[i].x-tail->x)<12&&abs(tail[i].y-tail->y)<12)goto die;
 			glRecti(tail[i].x-8,tail[i].y-8,tail[i].x+8,tail[i].y+8);
-			if(abs(tail[i].x-apx)<24&&abs(tail[i].y-apy)<24){
+			if(abs(tail[i].x-apx)<20&&abs(tail[i].y-apy)<20){
 				do apx=rand()&511; while(apx<32||apx>480);
 				do apy=rand()&511; while(apx<32||apx>480);
 				tail[tlen].x=tail[tlen-1].x;
