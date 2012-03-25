@@ -25,7 +25,7 @@ int main(int argc,char**argv){
 		break;case 3:tail->y-=8;
 		break;default:__builtin_unreachable();
 		}
-		if(tail->x<0||tail->x>512||tail->y<0||tail->y>512)goto die;
+		if(tail->x&512||tail->y&512)goto die;
 		glColor3ub(0,255,0);
 		for(int i=0;i<tlen;i++){
 			if(i>2&&abs(tail[i].x-tail->x)<12&&abs(tail[i].y-tail->y)<12)goto die;
