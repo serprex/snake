@@ -1,19 +1,21 @@
-#include <GL/glfw.h>
+#include <GLFW/glfw3.h>
+#include <winix/time.h>
+#include <winix/rand.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
 int main(int argc,char**argv){
 	glfwInit();
-	glfwDisable(GLFW_AUTO_POLL_EVENTS);
-	glfwOpenWindow(512,512,0,0,0,0,0,0,GLFW_WINDOW);
+	GLFWwindow*wnd=glfwCreateWindow(512,512,0,0,0);
+	glfwMakeContextCurrent(wnd);
 	glOrtho(0,512,512,0,1,-1);
-	srand(glfwGetTime());
+	initrand();
 	union{struct{uint16_t x,y;};uint32_t z;}tail[7396];
 	die:;
 	int tlen=1,apx=tail->x=256,apy=tail->y=256,dir=0;
 	for(;;){
 		glClear(GL_COLOR_BUFFER_BIT);
-		int dx=glfwGetKey(GLFW_KEY_RIGHT)-glfwGetKey(GLFW_KEY_LEFT),dy=glfwGetKey(GLFW_KEY_DOWN)-glfwGetKey(GLFW_KEY_UP);
+		int dx=glfwGetKey(wnd,GLFW_KEY_RIGHT)-glfwGetKey(wnd,GLFW_KEY_LEFT),dy=glfwGetKey(wnd,GLFW_KEY_DOWN)-glfwGetKey(wnd,GLFW_KEY_UP);
 		if(!dx!=!dy){
 			int d=dx?1-dx:2-dy;
 			if((d&1)!=(dir&1))dir=d;
@@ -40,10 +42,9 @@ int main(int argc,char**argv){
 		}
 		glColor3ub(255,0,0);
 		glRecti(apx-12,apy-12,apx+12,apy+12);
-		glfwSwapBuffers();
-		glfwSleep(1./50-glfwGetTime());
-		glfwSetTime(0);
+		glfwSwapBuffers(wnd);
+		endframe(50);
 		glfwPollEvents();
-		if(glfwGetKey(GLFW_KEY_ESC)||!glfwGetWindowParam(GLFW_OPENED))return 0;
+		if(glfwGetKey(wnd,GLFW_KEY_ESCAPE)||glfwWindowShouldClose(wnd))return 0;
 	}
 }
